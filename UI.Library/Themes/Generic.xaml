@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converts="clr-namespace:UI.Library.Converts"
+    xmlns:local="clr-namespace:UI.Library.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryControl.xaml" />
+        <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryTextBox.xaml" />
+        <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryCheckBox.xaml" />
+        <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryButton.xaml" />
+        <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryImage.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

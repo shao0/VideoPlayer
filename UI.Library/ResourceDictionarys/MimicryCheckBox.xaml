@@ -1,0 +1,50 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:UI.Library.Controls">
+
+    <Style TargetType="{x:Type controls:MimicryCheckBox}">
+        <Setter Property="MinHeight" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <controls:MimicryControl>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse
+                                Name="Ellipse_Outer"
+                                Width="15"
+                                Height="15"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Stroke="Gray"
+                                StrokeThickness="3" />
+                            <Ellipse
+                                Name="Ellipse_Inner"
+                                Grid.Column="0"
+                                Width="5"
+                                Height="5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Fill="DarkGreen"
+                                Visibility="Collapsed" />
+                            <ContentPresenter
+                                Grid.Column="1"
+                                Margin="2,0"
+                                VerticalAlignment="Center" />
+                        </Grid>
+                    </controls:MimicryControl>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Ellipse_Inner" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Ellipse_Outer" Property="Stroke" Value="DarkGreen" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
