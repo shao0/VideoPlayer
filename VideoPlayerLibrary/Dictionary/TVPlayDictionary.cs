@@ -14,8 +14,8 @@ namespace VideoPlayerLibrary.Dictionary
         /// </summary>
         public  Dictionary<int, string> SortDictionary { get; set; } = new Dictionary<int, string>
         {
-            {19,"最新"},
             {18,"最热"},
+            {19,"最新"},
             {16,"好评"},
             {21,"口碑好剧"},
             {54,"高分好评"},
