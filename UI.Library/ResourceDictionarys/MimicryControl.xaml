@@ -27,11 +27,19 @@
     </Style>
     <Style TargetType="{x:Type controls:MimicryControl}">
         <Setter Property="Margin" Value="1" />
+        <Setter Property="Width" Value="auto" />
+        <Setter Property="Height" Value="auto" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MimicryControl}">
                     <Border Padding="5">
-                        <Grid>
+                        <Grid
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            MaxHeight="{TemplateBinding MaxHeight}">
                             <Border
                                 Name="Border_Light"
                                 Style="{StaticResource BorderMimicry}"
@@ -40,7 +48,10 @@
                                 Name="Border_Dark"
                                 Style="{StaticResource BorderMimicry}"
                                 Tag="2" />
-                            <Border Name="Border_Content" Style="{StaticResource BorderMimicry}">
+                            <Border
+                                Name="Border_Content"
+                                Padding="{TemplateBinding Padding}"
+                                Style="{StaticResource BorderMimicry}">
                                 <Border.Clip>
                                     <MultiBinding Converter="{StaticResource BorderClipConverter}">
                                         <Binding ElementName="Border_Content" Path="ActualWidth" />

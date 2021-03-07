@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\MimicryImage.cs" />
+    <Compile Include="MessageTools\MessageAttached.cs" />
+    <Compile Include="Panels\InsertionOrderPanel.cs" />
+    <Compile Include="MessageTools\ViewExpand.cs" />
     <Page Include="ResourceDictionarys\MimicryButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,4 +107,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy $(TargetPath) $(ProjectDir)..\..\..\SelfLibrary\</PostBuildEvent>
+  </PropertyGroup>
 </Project>
