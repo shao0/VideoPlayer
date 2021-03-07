@@ -6,22 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SelfVideoPlayer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:messageTools="clr-namespace:UI.Library.MessageTools;assembly=UI.Library"
     xmlns:regions="http://prismlibrary.com/"
     xmlns:views="clr-namespace:SelfVideoPlayer.Views"
     Title="MainWindow"
     Width="800"
     Height="450"
+    Style="{StaticResource Window.MessageHost}"
     mc:Ignorable="d">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:MainWindow}}}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <ContentControl Grid.Row="1" regions:RegionManager.RegionName="ContentRegion" />
-    </Grid>
+    <ContentControl Grid.Row="1" regions:RegionManager.RegionName="ContentRegion" />
 </Window>

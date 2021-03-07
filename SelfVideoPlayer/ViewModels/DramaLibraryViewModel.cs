@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,6 +10,7 @@ using Prism.Commands;
 using Prism.DryIoc;
 using Prism.Mvvm;
 using SelfVideoPlayer.Views;
+using UI.Library.MessageTools;
 using VideoPlayerLibrary.Dictionary;
 using VideoPlayerLibrary.Models;
 using VideoPlayerLibrary.Tools;
@@ -398,31 +400,37 @@ namespace SelfVideoPlayer.ViewModels
         /// <returns></returns>
         private async Task LoadFilmInfo()
         {
-            string url = GetUrl();
-
-            string _html = await WebHttpRequest.GetStringAsync(url);
-            _html = _html.Replace("\t", string.Empty).Replace("\b", string.Empty).Replace("\0", string.Empty)
-                .Replace("\r", string.Empty).Replace("\n", string.Empty);
-            string zz =
-                "<div class=\"list_item\" __wind><a href=\"([\\s\\S]*?)\" class=\"figure\" target=\"_blank\" tabindex=\"-1\" data-float=\"([\\s\\S]*?)\" title=\"([\\s\\S]*?)\"><img class=\"figure_pic\" src=\"([\\s\\S]*?)\"";
-            MatchCollection match = new Regex(zz).Matches(_html);
-            Hashtable hashtable = new Hashtable();
-            hashtable.Add("Host", "puui.qpic.cn");
-            FilmInfoList.Clear();
-            foreach (Match m in match)
+            try
             {
-                var image = await WebHttpRequest.GetByteAsync($"http:{m.Result("$4")}", header: hashtable);
-                FilmInfoList.Add(new FilmInfo
+                string url = GetUrl();
+                string _html = await WebHttpRequest.GetStringAsync(url);
+                _html = _html.Replace("\t", string.Empty).Replace("\b", string.Empty).Replace("\0", string.Empty)
+                    .Replace("\r", string.Empty).Replace("\n", string.Empty);
+                string zz =
+                    "<div class=\"list_item\" __wind><a href=\"([\\s\\S]*?)\" class=\"figure\" target=\"_blank\" tabindex=\"-1\" data-float=\"([\\s\\S]*?)\" title=\"([\\s\\S]*?)\"><img class=\"figure_pic\" src=\"([\\s\\S]*?)\"";
+                MatchCollection match = new Regex(zz).Matches(_html);
+                Hashtable hashtable = new Hashtable();
+                hashtable.Add("Host", "puui.qpic.cn");
+                FilmInfoList.Clear();
+                foreach (Match m in match)
                 {
-                    ImageSource = image.ConvertBitmapImage(),
-                    Title = m.Result("$3"),
-                    Url = m.Result("$1"),
-                });
-            }
+                    var image = await WebHttpRequest.GetByteAsync($"http:{m.Result("$4")}", header: hashtable);
+                    FilmInfoList.Add(new FilmInfo
+                    {
+                        ImageSource = image.ConvertBitmapImage(),
+                        Title = m.Result("$3"),
+                        Url = m.Result("$1"),
+                    });
+                }
 
-            zz = "_stat2=\"([\\s\\S]*?)\">([\\d]*?)</button><button class=\"page_next \"";
-            match = new Regex(zz).Matches(_html);
-            PageCount = match.Count > 0 ? int.Parse(match[0].Result("$2")) : 0;
+                zz = "_stat2=\"([\\s\\S]*?)\">([\\d]*?)</button><button class=\"page_next \"";
+                match = new Regex(zz).Matches(_html);
+                PageCount = match.Count > 0 ? int.Parse(match[0].Result("$2")) : 0;
+            }
+            catch (Exception e)
+            {
+               View.Show($"解析失败:{e.Message}");
+            }
         }
 
         string GetUrl()

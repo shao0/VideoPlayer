@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:messageTools="clr-namespace:UI.Library.MessageTools">
+
+    <Style x:Key="Window.MessageHost" TargetType="Window">
+        <Setter Property="Background" Value="#eaeaea" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Window">
+                    <Grid messageTools:MessageAttached.MessageHost="{Binding RelativeSource={RelativeSource TemplatedParent}}" Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

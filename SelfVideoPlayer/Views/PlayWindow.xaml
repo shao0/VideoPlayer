@@ -12,6 +12,7 @@
     Width="800"
     Height="450"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
+    Style="{StaticResource Window.MessageHost}"
     mc:Ignorable="d">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -52,7 +53,7 @@
             <ColumnDefinition Width="5*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ContentControl mvvm:RegionManager.RegionName="WebContent" />
+        <ContentControl mvvm:RegionManager.RegionName="PlayerContent" />
         <ScrollViewer
             Grid.Column="1"
             HorizontalAlignment="Center"

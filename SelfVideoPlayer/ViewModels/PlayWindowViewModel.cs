@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using UI.Library.MessageTools;
 using VideoPlayerLibrary.Events;
 using VideoPlayerLibrary.Models;
 using VideoPlayerLibrary.Tools;
@@ -26,7 +27,7 @@ namespace SelfVideoPlayer.ViewModels
 
         public PlayWindowViewModel(IEventAggregator ea)
         {
-            _ea = ea; 
+            _ea = ea;
         }
 
         #region LoadedCommand 加载命令
@@ -84,6 +85,7 @@ namespace SelfVideoPlayer.ViewModels
         {
             if (obj is FilmPlayInfo filmPlayInfo)
             {
+                string msg = "解析失败";
                 try
                 {
                     var html = await WebHttpRequest.GetStringAsync($"https://api.kk06.top/?url=%20{filmPlayInfo.PlayUrl}");
@@ -91,7 +93,6 @@ namespace SelfVideoPlayer.ViewModels
                         .Replace("\r", string.Empty).Replace("\n", string.Empty);
 
                     string zz = "var urls = \"([\\s\\S]*?)\";";
-
                     MatchCollection match = new Regex(zz).Matches(html);
                     if (match.Count > 0)
                     {
@@ -99,7 +100,6 @@ namespace SelfVideoPlayer.ViewModels
                         _ea.GetEvent<UrlChangeSentEvent>().Publish(filmPlayInfo);
                         return;
                     }
-
                     html = await WebHttpRequest.GetStringAsync(
                         $"https://z1.m1907.cn/api/v/?z=22423808d4caf1c00927b1f988f8e61b&jx=%20{filmPlayInfo.PlayUrl}&s1ig=11397");
                     JObject jObject = JObject.Parse(html);
@@ -112,9 +112,9 @@ namespace SelfVideoPlayer.ViewModels
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    msg = $"{msg}:{e.Message}";
                 }
-                MessageBox.Show("解析失败");
+                View.Show(msg);
             }
         }
 
