@@ -1,0 +1,141 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converts="clr-namespace:UI.Library.Converts"
+    xmlns:local="clr-namespace:UI.Library.Controls">
+
+    <converts:CornerRadiusConvert x:Key="CornerRadiusConvert" />
+    <converts:ScaleConvert x:Key="ScaleConvert" />
+    <converts:PositionConvert x:Key="PositionConvert" />
+    <PathGeometry x:Key="Path_Thumb" Figures="M849 398c-2.7 61.6-17 122.2-42.1 178.5-31.6 71.2-71.2 138.5-118.2 200.6-40.3 55.3-84.1 107.7-129.2 159.2-11.5 15.2-29.6 24-48.7 23.8-17.5-1.4-33.7-10.2-44.4-24.1-19.3-22.1-38.4-44.4-57.2-66.9C357 808 309.6 742.9 267.4 674.4c-35.9-57.1-63-119.3-80.4-184.5-49.3-179.2 56.1-364.4 235.3-413.7C601.5 26.9 786.7 132.3 836 311.5c2.1 7.5 3.9 15.1 5.4 22.7 4.1 20.9 5.1 42.5 7.6 63.8z m-188.4 0.2c0.9-83.1-65.7-151.2-148.8-152.2-83.1-0.9-151.2 65.7-152.2 148.8-0.9 83.1 65.7 151.2 148.8 152.2h1.2c82.7 0.6 150.3-66 151-148.8z" />
+    <ControlTemplate x:Key="SliderThumbHorizontalDefault" TargetType="{x:Type Thumb}">
+        <Grid
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            UseLayoutRounding="True">
+            <Grid.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    ShadowDepth="0"
+                    Color="White" />
+            </Grid.Effect>
+            <Path
+                x:Name="grip"
+                VerticalAlignment="Center"
+                Data="{StaticResource Path_Thumb}"
+                Fill="#6d6d6d"
+                SnapsToDevicePixels="True"
+                Stretch="Fill"
+                Stroke="#dddddd"
+                StrokeThickness="3"
+                UseLayoutRounding="True" />
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="BorderMimicry" TargetType="Border">
+        <Setter Property="CornerRadius">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource CornerRadiusConvert}">
+                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Tag" Value="1">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Direction="135" Color="White" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Tag" Value="2">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="#d4d4d4" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type local:MimicrySlider}">
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MimicrySlider}">
+                    <Border
+                        Name="PART_Border"
+                        Cursor="Hand"
+                        Style="{StaticResource BorderMimicry}">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="Height" TargetName="Thumb">
+                                        <DoubleAnimation To="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualHeight}" Duration="00:00:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="Height" TargetName="Thumb">
+                                        <DoubleAnimation To="0" Duration="00:00:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="10"
+                                Direction="0"
+                                ShadowDepth="0"
+                                Color="#4C4D4D4D" />
+                        </Border.Effect>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="1" Color="Black" />
+                                <GradientStop Offset="0.7" Color="#222B48" />
+                                <GradientStop Offset="0.5" Color="#1F2946" />
+                                <GradientStop Offset="0.3" Color="#222B48" />
+                                <GradientStop Offset="0" Color="Black" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <TickBar x:Name="TopTick" Visibility="Collapsed" />
+                            <Border
+                                HorizontalAlignment="Left"
+                                Background="#d4d4d4"
+                                Style="{StaticResource BorderMimicry}">
+                                <Border.Width>
+                                    <MultiBinding Converter="{StaticResource ScaleConvert}">
+                                        <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </MultiBinding>
+                                </Border.Width>
+                            </Border>
+                            <Track x:Name="PART_Track">
+                                <Track.Thumb>
+                                    <Thumb
+                                        x:Name="Thumb"
+                                        Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}"
+                                        Height="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Focusable="False"
+                                        OverridesDefaultStyle="True"
+                                        Template="{StaticResource SliderThumbHorizontalDefault}">
+                                        <Thumb.Margin>
+                                            <MultiBinding Converter="{StaticResource PositionConvert}">
+                                                <Binding Path="ActualHeight" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Thumb.Margin>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

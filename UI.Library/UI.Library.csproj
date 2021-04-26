@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\MimicryImage.cs" />
+    <Compile Include="Controls\MimicrySlider.cs" />
+    <Compile Include="Converts\CornerRadiusConvert.cs" />
+    <Compile Include="Converts\PositionConvert.cs" />
+    <Compile Include="Converts\ScaleConvert.cs" />
     <Compile Include="MessageTools\MessageAttached.cs" />
     <Compile Include="Panels\InsertionOrderPanel.cs" />
     <Compile Include="MessageTools\ViewExpand.cs" />
@@ -67,6 +71,10 @@
     <Page Include="ResourceDictionarys\MimicryImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionarys\MimicrySlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ResourceDictionarys\MimicryTextBox.xaml">
       <SubType>Designer</SubType>

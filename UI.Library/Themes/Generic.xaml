@@ -9,5 +9,6 @@
         <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryCheckBox.xaml" />
         <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryButton.xaml" />
         <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryImage.xaml" />
+        <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicrySlider.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
