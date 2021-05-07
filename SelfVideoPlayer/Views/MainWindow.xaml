@@ -12,6 +12,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    Icon="../Icon.ico"
     Style="{StaticResource Window.MessageHost}"
     mc:Ignorable="d">
     <b:Interaction.Triggers>

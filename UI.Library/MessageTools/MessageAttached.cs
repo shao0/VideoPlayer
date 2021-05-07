@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Animation;
 using UI.Library.Controls;
 using UI.Library.Panels;
@@ -96,7 +97,7 @@ namespace UI.Library.MessageTools
                 if (messagePanel != null)
                 {
                     var mimicryControl = new MimicryControl();
-                    mimicryControl.Padding = new Thickness(10,5,10,5);
+                    mimicryControl.Padding = new Thickness(10, 5, 10, 5);
                     mimicryControl.FontSize = 18;
                     var tips = new TextBlock();
                     tips.Text = msg;
@@ -110,15 +111,15 @@ namespace UI.Library.MessageTools
                         var moveTime = 500;
                         var marginAnimation = new ThicknessAnimationUsingKeyFrames();
                         marginAnimation.KeyFrames = new ThicknessKeyFrameCollection();
-                        marginAnimation.KeyFrames.Add(new LinearThicknessKeyFrame {KeyTime = TimeSpan.FromMilliseconds(moveTime), Value = new Thickness(0)});
+                        marginAnimation.KeyFrames.Add(new LinearThicknessKeyFrame { KeyTime = TimeSpan.FromMilliseconds(moveTime), Value = new Thickness(0) });
                         var opacityAnimation = new DoubleAnimationUsingKeyFrames();
                         opacityAnimation.KeyFrames = new DoubleKeyFrameCollection();
                         opacityAnimation.KeyFrames.Add(new LinearDoubleKeyFrame()
-                            {KeyTime = TimeSpan.FromMilliseconds(moveTime), Value = 1});
+                        { KeyTime = TimeSpan.FromMilliseconds(moveTime), Value = 1 });
                         opacityAnimation.KeyFrames.Add(new LinearDoubleKeyFrame()
-                            {KeyTime = TimeSpan.FromMilliseconds(outMillisecond + moveTime - 500), Value = 0.7});
+                        { KeyTime = TimeSpan.FromMilliseconds(outMillisecond + moveTime - 500), Value = 0.7 });
                         opacityAnimation.KeyFrames.Add(new LinearDoubleKeyFrame()
-                            {KeyTime = TimeSpan.FromMilliseconds(outMillisecond + moveTime), Value = 0});
+                        { KeyTime = TimeSpan.FromMilliseconds(outMillisecond + moveTime), Value = 0 });
                         opacityAnimation.Completed += (s, e) =>
                         {
                             messagePanel.Children.Remove(mimicryControl);
@@ -131,6 +132,60 @@ namespace UI.Library.MessageTools
             });
 
         }
+        /// <summary>
+        /// 窗口宿主事件名称
+        /// </summary>
+        public static readonly DependencyProperty HostEventNameProperty = DependencyProperty.RegisterAttached(
+            "HostEventName", typeof(string), typeof(MessageAttached), new PropertyMetadata(default(string), (s, e) =>
+            {
+                if (s is ButtonBase buttonBase)
+                {
+                    buttonBase.Click += (bs, be) =>
+                    {
+                        if (bs is ButtonBase sender && Window.GetWindow(sender) is Window window)
+                        {
+                            var hostEventName = GetHostEventName(sender);
+                            switch (hostEventName)
+                            {
+                                case "Min":
+                                    window.WindowState = WindowState.Minimized;
+                                    break;
+                                case "Normal":
+                                    if (sender is ToggleButton toggleButton) window.WindowState = toggleButton.IsChecked != true
+                                            ? WindowState.Normal
+                                            : WindowState.Maximized;
+                                    break;
+                                case "Close":
+                                    window.Close();
+                                    break;
+                            }
+                        }
+                    };
+                }
+            }));
+
+
+        /// <summary>
+        /// 获取窗口宿主事件名称
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string GetHostEventName(DependencyObject obj)
+        {
+            return (string)obj.GetValue(HostEventNameProperty);
+        }
+
+        /// <summary>
+        /// 设置窗口宿主事件名称
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="value"></param>
+        public static void SetHostEventName(DependencyObject obj, string value)
+        {
+            obj.SetValue(HostEventNameProperty, value);
+        }
+
+
 
         private static FrameworkElement GetMessageWindow(FrameworkElement element)
         {

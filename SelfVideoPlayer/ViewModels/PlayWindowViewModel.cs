@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -88,6 +89,9 @@ namespace SelfVideoPlayer.ViewModels
                 string msg = "解析失败";
                 try
                 {
+                    Process.Start($"https://www.nxflv.com/?url={filmPlayInfo.PlayUrl}");
+                    return;
+
                     var html = await WebHttpRequest.GetStringAsync($"https://api.kk06.top/?url=%20{filmPlayInfo.PlayUrl}");
                     html = html.Replace("\t", string.Empty).Replace("\b", string.Empty).Replace("\0", string.Empty)
                         .Replace("\r", string.Empty).Replace("\n", string.Empty);

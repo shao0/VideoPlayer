@@ -8,9 +8,11 @@
     xmlns:local="clr-namespace:SelfVideoPlayer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="http://prismlibrary.com/"
+    xmlns:viewmodels="clr-namespace:SelfVideoPlayer.ViewModels"
     Name="View"
     Width="800"
     Height="450"
+    d:DataContext="{d:DesignInstance Type=viewmodels:PlayWindowViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Style="{StaticResource Window.MessageHost}"
     mc:Ignorable="d">
