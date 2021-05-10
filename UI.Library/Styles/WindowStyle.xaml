@@ -51,10 +51,10 @@
                         <Grid.Background>
                             <SolidColorBrush x:Name="BackgroundBrush" Color="#19000000" />
                         </Grid.Background>
-                        <Path
-                            Data="M 4,4 L 26,26 M 26,4 L 4,26"
-                            Stroke="{TemplateBinding Foreground}"
-                            Style="{StaticResource HostButton.Path}">
+                        <Path Data="M 4,4 L 26,26 M 26,4 L 4,26" Style="{StaticResource HostButton.Path}">
+                            <Path.Stroke>
+                                <SolidColorBrush x:Name="PathBrush" Color="#00688F" />
+                            </Path.Stroke>
                             <Path.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform x:Name="PathScale" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
@@ -68,6 +68,11 @@
                             <BeginStoryboard>
                                 <Storyboard>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
+                                        <ColorAnimationUsingKeyFrames.KeyFrames>
+                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#4B000000" />
+                                        </ColorAnimationUsingKeyFrames.KeyFrames>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PathBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#CCD00000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
@@ -91,6 +96,11 @@
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#19000000" />
+                                        </ColorAnimationUsingKeyFrames.KeyFrames>
+                                    </ColorAnimationUsingKeyFrames>
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PathBrush" Storyboard.TargetProperty="Color">
+                                        <ColorAnimationUsingKeyFrames.KeyFrames>
+                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#00688F" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathRotate" Storyboard.TargetProperty="Angle">
@@ -238,7 +248,7 @@
         <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="40" ResizeBorderThickness="5" />
+                <WindowChrome CaptionHeight="50" ResizeBorderThickness="5" />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -247,15 +257,18 @@
                     <Border
                         Margin="5"
                         Background="#eaeaea"
-                        BorderBrush="#44000000"
+                        BorderBrush="#33000000"
                         BorderThickness="1">
                         <Grid Background="{StaticResource Host.Background}">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="40" />
+                                <RowDefinition Height="50" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <Border BorderBrush="#44000000" BorderThickness="1">
-                                <DockPanel Grid.Row="0" Background="#efefef">
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect Opacity="0.4" />
+                                </Border.Effect>
+                                <DockPanel Background="#efefef">
                                     <StackPanel
                                         VerticalAlignment="Center"
                                         DockPanel.Dock="Left"
@@ -264,6 +277,7 @@
                                         <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Title}" />
                                     </StackPanel>
                                     <StackPanel
+                                        Margin="0,0,10,0"
                                         HorizontalAlignment="Right"
                                         DockPanel.Dock="Right"
                                         Orientation="Horizontal">
@@ -281,7 +295,10 @@
                                 Grid.Row="1"
                                 messageTools:MessageAttached.MessageHost="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                 ClipToBounds="True">
-                                <ContentPresenter Margin="10" />
+                                <!--<Grid.Effect>
+                                    <DropShadowEffect Opacity="1" ShadowDepth="0" />
+                                </Grid.Effect>-->
+                                <ContentPresenter Margin="20" />
                             </Grid>
                         </Grid>
                     </Border>

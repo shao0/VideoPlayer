@@ -53,6 +53,7 @@
     <Compile Include="Converts\CornerRadiusConvert.cs" />
     <Compile Include="Converts\PositionConvert.cs" />
     <Compile Include="Converts\ScaleConvert.cs" />
+    <Compile Include="Converts\VisibilityConvert.cs" />
     <Compile Include="MessageTools\MessageAttached.cs" />
     <Compile Include="Panels\InsertionOrderPanel.cs" />
     <Compile Include="MessageTools\ViewExpand.cs" />

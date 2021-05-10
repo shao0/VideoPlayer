@@ -29,6 +29,8 @@
         <Setter Property="Margin" Value="1" />
         <Setter Property="Width" Value="auto" />
         <Setter Property="Height" Value="auto" />
+        <Setter Property="MinHeight" Value="25" />
+        <Setter Property="MinWidth" Value="70" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MimicryControl}">

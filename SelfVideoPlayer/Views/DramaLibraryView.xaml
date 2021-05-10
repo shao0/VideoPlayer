@@ -4,17 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:controls="clr-namespace:UI.Library.Controls;assembly=UI.Library"
+    xmlns:converts="clr-namespace:UI.Library.Converts;assembly=UI.Library"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="http://prismlibrary.com/"
+    xmlns:viewModels="clr-namespace:SelfVideoPlayer.ViewModels"
     xmlns:views="clr-namespace:SelfVideoPlayer.Views"
     x:Name="View"
+    d:DataContext="{d:DesignInstance Type=viewModels:DramaLibraryViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
-    Background="#eaeaea"
+    Background="Transparent"
     mc:Ignorable="d">
     <UserControl.Resources>
+        <converts:VisibilityConvert x:Key="VisibilityConvert" />
         <DataTemplate x:Key="DataTemplate.FilmInfo">
             <controls:MimicryControl>
                 <Button
@@ -57,20 +61,23 @@
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <TabControl SelectedIndex="{Binding SelectFilmType}">
-            <TabItem>
-                <TabItem.Header>
-                    <controls:MimicryControl
-                        MinWidth="70"
-                        MinHeight="40"
-                        Content="电视剧" />
-                </TabItem.Header>
-                <StackPanel Orientation="Horizontal">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Margin="5,0" SelectedIndex="{Binding SelectFilmType}">
+            <ListBoxItem Content="电视剧" />
+            <ListBoxItem Content="动漫" />
+        </ListBox>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Visibility="{Binding SelectFilmType, Converter={StaticResource VisibilityConvert}, ConverterParameter=0}">
                     <TextBlock Text="排序:" />
                     <ComboBox
                         DisplayMemberPath="Value"
@@ -96,15 +103,10 @@
                         SelectedValue="{Binding YearValue}"
                         SelectedValuePath="Key" />
                 </StackPanel>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <controls:MimicryControl
-                        MinWidth="70"
-                        MinHeight="40"
-                        Content="动漫" />
-                </TabItem.Header>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel
+                    Grid.Row="0"
+                    Orientation="Horizontal"
+                    Visibility="{Binding SelectFilmType, Converter={StaticResource VisibilityConvert}, ConverterParameter=1}">
                     <TextBlock Text="排序:" />
                     <ComboBox
                         DisplayMemberPath="Value"
@@ -142,48 +144,48 @@
                         SelectedValue="{Binding CartoonItemValue}"
                         SelectedValuePath="Key" />
                 </StackPanel>
-            </TabItem>
-        </TabControl>
-        <ScrollViewer
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            HorizontalScrollBarVisibility="Disabled"
-            VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemTemplate="{StaticResource DataTemplate.FilmInfo}" ItemsSource="{Binding FilmInfoList}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </ScrollViewer>
-        <StackPanel
-            Grid.Row="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <controls:MimicryButton Command="{Binding PreviousPageCommand}" Content="上页" />
-            <TextBlock>
-                <Run Text="当前" />
-                <Run Text=" " />
-                <Run Text="{Binding PageCurrent}" />
-                <Run Text=" " /><Run Text="页" />
-            </TextBlock>
-            <controls:MimicryButton Command="{Binding NextPageCommand}" Content="下页" />
-            <TextBlock>
-                <Run Text="共" />
-                <!--<Run Text="{Binding VideoCount}" />
+            </Grid>
+            <ScrollViewer
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemTemplate="{StaticResource DataTemplate.FilmInfo}" ItemsSource="{Binding FilmInfoList}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+            <StackPanel
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <controls:MimicryButton Command="{Binding PreviousPageCommand}" Content="上页" />
+                <TextBlock>
+                    <Run Text="当前" />
+                    <Run Text=" " />
+                    <Run Text="{Binding PageCurrent}" />
+                    <Run Text=" " /><Run Text="页" />
+                </TextBlock>
+                <controls:MimicryButton Command="{Binding NextPageCommand}" Content="下页" />
+                <TextBlock>
+                    <Run Text="共" />
+                    <!--<Run Text="{Binding VideoCount}" />
                 <Run Text="条" />-->
-                <Run Text="{Binding PageCount}" />
-                <Run Text="页" />
-            </TextBlock>
-            <TextBlock Text="  跳转到" />
-            <controls:MimicryTextBox Name="GoTextBox" MinWidth="40" />
-            <TextBlock Text="页" />
-            <controls:MimicryButton
-                Command="{Binding GoCommand}"
-                CommandParameter="{Binding ElementName=GoTextBox, Path=Text}"
-                Content="Go" />
-        </StackPanel>
+                    <Run Text="{Binding PageCount}" />
+                    <Run Text="页" />
+                </TextBlock>
+                <TextBlock Text="  跳转到" />
+                <controls:MimicryTextBox Name="GoTextBox" MinWidth="40" />
+                <TextBlock Text="页" />
+                <controls:MimicryButton
+                    Command="{Binding GoCommand}"
+                    CommandParameter="{Binding ElementName=GoTextBox, Path=Text}"
+                    Content="Go" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

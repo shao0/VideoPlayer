@@ -31,7 +31,7 @@ namespace SelfVideoPlayer.ViewModels
         /// <summary>
         /// 每次请求的数据条数
         /// </summary>
-        private readonly int PageSize = 3 * 10;
+        private readonly int PageSize = 3 * 9;
 
         public DramaLibraryViewModel(PrismApplication app, TvPlayDictionary tvPlayDictionary)
         {
