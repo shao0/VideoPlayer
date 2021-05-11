@@ -65,7 +65,7 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListBox Margin="5,0" SelectedIndex="{Binding SelectFilmType}">
+        <ListBox SelectedIndex="{Binding SelectFilmType}" Style="{StaticResource MimicryListBox}">
             <ListBoxItem Content="电视剧" />
             <ListBoxItem Content="动漫" />
         </ListBox>
@@ -76,28 +76,28 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Visibility="{Binding SelectFilmType, Converter={StaticResource VisibilityConvert}, ConverterParameter=0}">
-                    <TextBlock Text="排序:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="排序"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.SortDictionary}"
                         SelectedValue="{Binding SortValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="类型:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="类型"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.FeatureDictionary}"
                         SelectedValue="{Binding FeatureValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="地区:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="地区"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.AreaDictionary}"
                         SelectedValue="{Binding AreaValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="年份:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="年份"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.YearDictionary}"
                         SelectedValue="{Binding YearValue}"
@@ -107,38 +107,38 @@
                     Grid.Row="0"
                     Orientation="Horizontal"
                     Visibility="{Binding SelectFilmType, Converter={StaticResource VisibilityConvert}, ConverterParameter=1}">
-                    <TextBlock Text="排序:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="排序"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.CartoonSortDictionary}"
                         SelectedValue="{Binding CartoonSortValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="类型:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="类型"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.CartoonTypeDictionary}"
                         SelectedValue="{Binding CartoonTypeValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="地区:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="地区"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.CartoonAreaDictionary}"
                         SelectedValue="{Binding CartoonAreaValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="时间:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="时间"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.CartoonYearDictionary}"
                         SelectedValue="{Binding CartoonYearValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="状态:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="状态"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.CartoonStatusDictionary}"
                         SelectedValue="{Binding CartoonStatusValue}"
                         SelectedValuePath="Key" />
-                    <TextBlock Text="分类:" />
-                    <ComboBox
+                    <controls:MimicryComboBox
+                        Title="分类"
                         DisplayMemberPath="Value"
                         ItemsSource="{Binding PlayDictionary.CartoonItemDictionary}"
                         SelectedValue="{Binding CartoonItemValue}"
@@ -180,12 +180,16 @@
                     <Run Text="页" />
                 </TextBlock>
                 <TextBlock Text="  跳转到" />
-                <controls:MimicryTextBox Name="GoTextBox" MinWidth="40" />
+                <controls:MimicryTextBox
+                    Name="GoTextBox"
+                    MinWidth="40"
+                    Text="{Binding GoPageNumber, Mode=TwoWay}">
+                    <controls:MimicryTextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding GoCommand}" />
+                    </controls:MimicryTextBox.InputBindings>
+                </controls:MimicryTextBox>
                 <TextBlock Text="页" />
-                <controls:MimicryButton
-                    Command="{Binding GoCommand}"
-                    CommandParameter="{Binding ElementName=GoTextBox, Path=Text}"
-                    Content="Go" />
+                <controls:MimicryButton Command="{Binding GoCommand}" Content="Go" />
             </StackPanel>
         </Grid>
     </Grid>

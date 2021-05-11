@@ -1,0 +1,153 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:UI.Library.Controls">
+    <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="ClickMode" Value="Press" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+                        <Path
+                            x:Name="PART_Path"
+                            Grid.Column="1"
+                            Width="16"
+                            Height="9"
+                            Data="M 5 5 L 15 20 25 5 "
+                            RenderTransformOrigin=".5,.5"
+                            Stretch="Uniform"
+                            StrokeThickness="3">
+                            <Path.Stroke>
+                                <SolidColorBrush x:Name="PART_SolidColorBrush" Color="Black" />
+                            </Path.Stroke>
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform x:Name="PART_Rotate" />
+                                    <ScaleTransform x:Name="PART_Scale" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_SolidColorBrush" Storyboard.TargetProperty="Color">
+                                            <ColorAnimationUsingKeyFrames.KeyFrames>
+                                                <LinearColorKeyFrame KeyTime="0:0:.2" Value="LimeGreen" />
+                                            </ColorAnimationUsingKeyFrames.KeyFrames>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Rotate" Storyboard.TargetProperty="Angle">
+                                            <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:.2" Value="180" />
+                                            </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_SolidColorBrush" Storyboard.TargetProperty="Color">
+                                            <ColorAnimationUsingKeyFrames.KeyFrames>
+                                                <LinearColorKeyFrame KeyTime="0:0:.2" Value="Black" />
+                                            </ColorAnimationUsingKeyFrames.KeyFrames>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Rotate" Storyboard.TargetProperty="Angle">
+                                            <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:.2" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Scale" Storyboard.TargetProperty="ScaleX">
+                                            <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:.2" Value="1.3" />
+                                            </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Scale" Storyboard.TargetProperty="ScaleX">
+                                            <DoubleAnimationUsingKeyFrames.KeyFrames>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:.2" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames.KeyFrames>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type controls:MimicryComboBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:MimicryComboBox}">
+                    <controls:MimicryControl>
+                        <Grid
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Run Text="{TemplateBinding Title}" />
+                                <Run Text=":" />
+                            </TextBlock>
+                            <Popup
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                MaxHeight="90"
+                                AllowsTransparency="True"
+                                IsOpen="{Binding Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Path=IsDropDownOpen}"
+                                PopupAnimation="Slide"
+                                StaysOpen="True">
+                                <ScrollViewer Background="#E5FFFFFF">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                            </Popup>
+                            <TextBlock
+                                Grid.Column="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{TemplateBinding Text}" />
+                            <ToggleButton
+                                x:Name="PART_ToggleButton"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3"
+                                Cursor="Hand"
+                                IsChecked="{Binding Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Path=IsDropDownOpen}"
+                                Style="{StaticResource ComboBoxToggleButton}" />
+                        </Grid>
+                    </controls:MimicryControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

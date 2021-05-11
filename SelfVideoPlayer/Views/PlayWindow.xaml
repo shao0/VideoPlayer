@@ -15,6 +15,7 @@
     d:DataContext="{d:DesignInstance Type=viewmodels:PlayWindowViewModel}"
     mvvm:ViewModelLocator.AutoWireViewModel="True"
     Style="{StaticResource Window.MessageHost}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">

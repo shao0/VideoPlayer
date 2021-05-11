@@ -44,9 +44,9 @@ namespace SelfVideoPlayer.ViewModels
         {
             _SortValue = PlayDictionary.SortDictionary.First().Key;
             _FeatureValue = PlayDictionary.FeatureDictionary.First().Key;
-            _AreaValue = PlayDictionary.AreaDictionary.First().Key; 
+            _AreaValue = PlayDictionary.AreaDictionary.First().Key;
             _YearValue = PlayDictionary.YearDictionary.First().Key;
-            _CartoonSortValue = PlayDictionary.CartoonSortDictionary.First().Key; 
+            _CartoonSortValue = PlayDictionary.CartoonSortDictionary.First().Key;
             _CartoonTypeValue = PlayDictionary.CartoonTypeDictionary.First().Key;
             _cartoonAreaValue = PlayDictionary.CartoonAreaDictionary.First().Key;
             _CartoonYearValue = PlayDictionary.CartoonYearDictionary.First().Key;
@@ -349,6 +349,30 @@ namespace SelfVideoPlayer.ViewModels
         }
         #endregion
 
+
+        #region string GoPageNumber 跳转页数
+        /// <summary>
+        /// 跳转页数 字段
+        /// </summary>
+        private string _GoPageNumber;
+        /// <summary>
+        /// 跳转页数 属性
+        /// </summary>
+        public string GoPageNumber
+        {
+            get => _GoPageNumber;
+            set
+            {
+                if (_GoPageNumber != value)
+                {
+                    _GoPageNumber = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        #endregion
+
+
         #region int SelectFilmType 选择的影片类型
         /// <summary>
         /// 选择的影片类型 字段
@@ -372,7 +396,6 @@ namespace SelfVideoPlayer.ViewModels
             }
         }
         #endregion
-
 
         #region LoadedCommand 加载命令
 
@@ -429,7 +452,7 @@ namespace SelfVideoPlayer.ViewModels
             }
             catch (Exception e)
             {
-               View.Show($"解析失败:{e.Message}");
+                View.Show($"解析失败:{e.Message}");
             }
         }
 
@@ -510,23 +533,24 @@ namespace SelfVideoPlayer.ViewModels
 
         #region GoCommand 跳转页命令
 
-        private DelegateCommand<object> _GoCommand;
+        private DelegateCommand _GoCommand;
         /// <summary>
         /// 跳转页命令
         /// </summary>
-        public DelegateCommand<object> GoCommand => _GoCommand ?? (_GoCommand = new DelegateCommand<object>(Go));
+        public DelegateCommand GoCommand => _GoCommand ?? (_GoCommand = new DelegateCommand(Go));
 
-        private async void Go(object obj)
+        private async void Go()
         {
-            if (obj is string s)
+            if (GoPageNumber != null && GoPageNumber.All(char.IsDigit))
             {
-                var go = int.Parse(s);
+                var go = int.Parse(GoPageNumber);
                 if (go > 0 && go < PageCount)
                 {
                     PageCurrent = go;
                     await LoadFilmInfo();
                 }
             }
+            GoPageNumber = null;
         }
 
         #endregion

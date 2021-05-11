@@ -69,22 +69,22 @@
                                 <Storyboard>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#4B000000" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#4B000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_PathBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#CCD00000" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#CCD00000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRotate" Storyboard.TargetProperty="Angle">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="180" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="180" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathScale" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1.2" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1.2" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
@@ -95,22 +95,22 @@
                                 <Storyboard>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#19000000" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#19000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_PathBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#00688F" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#00688F" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRotate" Storyboard.TargetProperty="Angle">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="0" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="0" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathScale" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
@@ -147,12 +147,12 @@
                                 <Storyboard>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#4B000000" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#4B000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1.2" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1.2" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
@@ -163,12 +163,12 @@
                                 <Storyboard>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#19000000" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#19000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
@@ -209,12 +209,12 @@
                                 <Storyboard>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#4B000000" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#4B000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1.2" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1.2" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
@@ -225,12 +225,12 @@
                                 <Storyboard>
                                     <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#19000000" />
+                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#19000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
                                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1" />
+                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
                                 </Storyboard>
@@ -271,11 +271,11 @@
                                 <!--<Grid.Effect>
                                     <DropShadowEffect Opacity="1" ShadowDepth="0" />
                                 </Grid.Effect>-->
-                                <ContentPresenter Margin="1" />
+                                <ContentPresenter Margin="2" />
                             </Grid>
                             <Border Grid.Row="0">
                                 <Border.Effect>
-                                    <DropShadowEffect Opacity="0.4" />
+                                    <DropShadowEffect Opacity="0.4" ShadowDepth="1" />
                                 </Border.Effect>
                                 <DockPanel Background="#efefef">
                                     <StackPanel
