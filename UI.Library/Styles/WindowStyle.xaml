@@ -4,8 +4,14 @@
     xmlns:converts="clr-namespace:UI.Library.Converts"
     xmlns:messageTools="clr-namespace:UI.Library.MessageTools">
     <converts:BorderClipConvert x:Key="BorderClipConverter" />
+    <Color x:Key="MouseOver.Color" A="76" />
+    <Color
+        x:Key="Close.Color"
+        A="204"
+        R="204" />
     <SolidColorBrush x:Key="HostButton.Background.Normal" Color="#19000000" />
     <SolidColorBrush x:Key="HostButton.Background.MouseOver" Color="#32000000" />
+    <SolidColorBrush x:Key="HostButton.Foreground" Color="#00688F" />
     <DrawingBrush
         x:Key="Host.Background"
         Stretch="Uniform"
@@ -16,13 +22,6 @@
             <ImageDrawing ImageSource="../Resources/cloud.png" Rect="0,0,157,157" />
         </DrawingBrush.Drawing>
     </DrawingBrush>
-    <SolidColorBrush x:Key="HostButton.Foreground" Color="#00688F" />
-    <Style x:Key="HostButton.Path" TargetType="Path">
-        <Setter Property="Stretch" Value="Uniform" />
-        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
-        <Setter Property="StrokeThickness" Value="2" />
-        <Setter Property="Margin" Value="7" />
-    </Style>
     <Style x:Key="HostButton" TargetType="ButtonBase">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="Background" Value="{StaticResource HostButton.Background.Normal}" />
@@ -39,6 +38,58 @@
                     RadiusY="15" />
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)"
+                                To="{StaticResource MouseOver.Color}"
+                                Duration="0:0:.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" Duration="0:0:.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="HostButton.Path" TargetType="Path">
+        <Setter Property="Fill" Value="Transparent" />
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="Stroke" Value="{StaticResource HostButton.Foreground}" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Margin" Value="7" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ForceCursor" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)">
+                            <DoubleAnimation To="1.2" Duration="0:0:.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)">
+                            <DoubleAnimation Duration="0:0:.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style
         x:Key="HostButton.Close"
@@ -47,75 +98,49 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Grid.Background>
-                            <SolidColorBrush x:Name="PART_BackgroundBrush" Color="#19000000" />
-                        </Grid.Background>
-                        <Path Data="M 4,4 L 26,26 M 26,4 L 4,26" Style="{StaticResource HostButton.Path}">
-                            <Path.Stroke>
-                                <SolidColorBrush x:Name="PART_PathBrush" Color="#00688F" />
-                            </Path.Stroke>
-                            <Path.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform x:Name="PART_PathScale" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
-                                    <RotateTransform x:Name="PART_PathRotate" />
-                                </TransformGroup>
-                            </Path.RenderTransform>
-                        </Path>
-                    </Grid>
+                    <Border Background="{TemplateBinding Background}" RenderTransformOrigin=".5,.5">
+                        <Border.RenderTransform>
+                            <RotateTransform x:Name="PART_Rotate" />
+                        </Border.RenderTransform>
+                        <Path
+                            Name="PART_Path"
+                            Data="M 4,4 L 26,26 M 26,4 L 4,26"
+                            Style="{StaticResource HostButton.Path}" />
+                    </Border>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#4B000000" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_PathBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#CCD00000" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRotate" Storyboard.TargetProperty="Angle">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="180" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathScale" Storyboard.TargetProperty="ScaleX">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1.2" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#19000000" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_PathBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#00688F" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRotate" Storyboard.TargetProperty="Angle">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="0" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathScale" Storyboard.TargetProperty="ScaleX">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Path" Property="ForceCursor" Value="True" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="PART_Path"
+                                            Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
+                                            To="{StaticResource Close.Color}"
+                                            Duration="0:0:.2" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PART_Rotate"
+                                            Storyboard.TargetProperty="Angle"
+                                            To="90"
+                                            Duration="0:0:.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="PART_Path"
+                                            Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
+                                            Duration="0:0:.2" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PART_Rotate"
+                                            Storyboard.TargetProperty="Angle"
+                                            Duration="0:0:.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -128,52 +153,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Grid.Background>
-                            <SolidColorBrush x:Name="PART_BackgroundBrush" Color="#19000000" />
-                        </Grid.Background>
+                    <Border Background="{TemplateBinding Background}">
                         <Path
+                            Name="PART_Path"
                             Data="M 4,14 L 26,14"
-                            Stroke="{TemplateBinding Foreground}"
-                            Style="{StaticResource HostButton.Path}">
-                            <Path.RenderTransform>
-                                <ScaleTransform x:Name="PART_PathRender" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
-                            </Path.RenderTransform>
-                        </Path>
-                    </Grid>
+                            Style="{StaticResource HostButton.Path}" />
+                    </Border>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#4B000000" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1.2" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#19000000" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Path" Property="ForceCursor" Value="True" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -186,56 +175,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
-                    <Grid>
-                        <Grid.Background>
-                            <SolidColorBrush x:Name="PART_BackgroundBrush" Color="#19000000" />
-                        </Grid.Background>
+                    <Border Background="{TemplateBinding Background}">
                         <Path
-                            x:Name="ButtonPath"
+                            Name="PART_Path"
                             Data="M 4,4 L 26,4 26,26 4,26 Z"
-                            Stroke="{TemplateBinding Foreground}"
-                            Style="{StaticResource HostButton.Path}">
-                            <Path.RenderTransform>
-                                <ScaleTransform x:Name="PART_PathRender" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
-                            </Path.RenderTransform>
-                        </Path>
-                    </Grid>
+                            Style="{StaticResource HostButton.Path}" />
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="ButtonPath" Property="Data" Value="M 2,6 L 24,6 24,28 2,28 Z M 6,6 6,2 28,2 28,24 24,24" />
+                            <Setter TargetName="PART_Path" Property="Data" Value="M 2,6 L 24,6 24,28 2,28 Z M 6,6 6,2 28,2 28,24 24,24" />
                         </Trigger>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#4B000000" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1.2" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
-                                        <ColorAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearColorKeyFrame KeyTime="00:00:0.2" Value="#19000000" />
-                                        </ColorAnimationUsingKeyFrames.KeyFrames>
-                                    </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
-                                        <DoubleAnimationUsingKeyFrames.KeyFrames>
-                                            <LinearDoubleKeyFrame KeyTime="00:00:0.2" Value="1" />
-                                        </DoubleAnimationUsingKeyFrames.KeyFrames>
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Path" Property="ForceCursor" Value="True" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
