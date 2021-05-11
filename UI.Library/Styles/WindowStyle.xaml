@@ -49,16 +49,16 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Grid.Background>
-                            <SolidColorBrush x:Name="BackgroundBrush" Color="#19000000" />
+                            <SolidColorBrush x:Name="PART_BackgroundBrush" Color="#19000000" />
                         </Grid.Background>
                         <Path Data="M 4,4 L 26,26 M 26,4 L 4,26" Style="{StaticResource HostButton.Path}">
                             <Path.Stroke>
-                                <SolidColorBrush x:Name="PathBrush" Color="#00688F" />
+                                <SolidColorBrush x:Name="PART_PathBrush" Color="#00688F" />
                             </Path.Stroke>
                             <Path.RenderTransform>
                                 <TransformGroup>
-                                    <ScaleTransform x:Name="PathScale" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
-                                    <RotateTransform x:Name="PathRotate" />
+                                    <ScaleTransform x:Name="PART_PathScale" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
+                                    <RotateTransform x:Name="PART_PathRotate" />
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
@@ -67,22 +67,22 @@
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#4B000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PathBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_PathBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#CCD00000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathRotate" Storyboard.TargetProperty="Angle">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRotate" Storyboard.TargetProperty="Angle">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="180" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathScale" Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathScale" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1.2" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
@@ -93,22 +93,22 @@
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#19000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PathBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_PathBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#00688F" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathRotate" Storyboard.TargetProperty="Angle">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRotate" Storyboard.TargetProperty="Angle">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="0" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
                                     </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathScale" Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathScale" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
@@ -130,14 +130,14 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Grid.Background>
-                            <SolidColorBrush x:Name="BackgroundBrush" Color="#19000000" />
+                            <SolidColorBrush x:Name="PART_BackgroundBrush" Color="#19000000" />
                         </Grid.Background>
                         <Path
                             Data="M 4,14 L 26,14"
                             Stroke="{TemplateBinding Foreground}"
                             Style="{StaticResource HostButton.Path}">
                             <Path.RenderTransform>
-                                <ScaleTransform x:Name="PathRender" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
+                                <ScaleTransform x:Name="PART_PathRender" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
                             </Path.RenderTransform>
                         </Path>
                     </Grid>
@@ -145,12 +145,12 @@
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#4B000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathRender" Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1.2" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
@@ -161,12 +161,12 @@
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#19000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathRender" Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
@@ -188,7 +188,7 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid>
                         <Grid.Background>
-                            <SolidColorBrush x:Name="BackgroundBrush" Color="#19000000" />
+                            <SolidColorBrush x:Name="PART_BackgroundBrush" Color="#19000000" />
                         </Grid.Background>
                         <Path
                             x:Name="ButtonPath"
@@ -196,7 +196,7 @@
                             Stroke="{TemplateBinding Foreground}"
                             Style="{StaticResource HostButton.Path}">
                             <Path.RenderTransform>
-                                <ScaleTransform x:Name="PathRender" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
+                                <ScaleTransform x:Name="PART_PathRender" ScaleY="{Binding RelativeSource={RelativeSource Self}, Path=ScaleX}" />
                             </Path.RenderTransform>
                         </Path>
                     </Grid>
@@ -207,12 +207,12 @@
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#4B000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathRender" Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1.2" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
@@ -223,12 +223,12 @@
                         <EventTrigger RoutedEvent="MouseLeave">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="BackgroundBrush" Storyboard.TargetProperty="Color">
+                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_BackgroundBrush" Storyboard.TargetProperty="Color">
                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                             <LinearColorKeyFrame KeyTime="00:00:0.3" Value="#19000000" />
                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                     </ColorAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PathRender" Storyboard.TargetProperty="ScaleX">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_PathRender" Storyboard.TargetProperty="ScaleX">
                                         <DoubleAnimationUsingKeyFrames.KeyFrames>
                                             <LinearDoubleKeyFrame KeyTime="00:00:0.3" Value="1" />
                                         </DoubleAnimationUsingKeyFrames.KeyFrames>
@@ -264,7 +264,16 @@
                                 <RowDefinition Height="50" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <Border>
+                            <Grid
+                                Grid.Row="1"
+                                messageTools:MessageAttached.MessageHost="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                ClipToBounds="True">
+                                <!--<Grid.Effect>
+                                    <DropShadowEffect Opacity="1" ShadowDepth="0" />
+                                </Grid.Effect>-->
+                                <ContentPresenter Margin="1" />
+                            </Grid>
+                            <Border Grid.Row="0">
                                 <Border.Effect>
                                     <DropShadowEffect Opacity="0.4" />
                                 </Border.Effect>
@@ -291,15 +300,6 @@
                                     </StackPanel>
                                 </DockPanel>
                             </Border>
-                            <Grid
-                                Grid.Row="1"
-                                messageTools:MessageAttached.MessageHost="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                ClipToBounds="True">
-                                <!--<Grid.Effect>
-                                    <DropShadowEffect Opacity="1" ShadowDepth="0" />
-                                </Grid.Effect>-->
-                                <ContentPresenter Margin="20" />
-                            </Grid>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

@@ -7,7 +7,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/UI.Library;Component/Styles/WindowStyle.xaml" />
+                <ResourceDictionary Source="/UI.Library;Component/Styles/ScrollViwerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style BasedOn="{StaticResource ScrollViewerNativeBaseStyle}" TargetType="ScrollViewer" />
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>
