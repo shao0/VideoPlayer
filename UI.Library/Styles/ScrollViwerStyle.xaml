@@ -59,7 +59,7 @@
                             <Setter TargetName="rectangle" Property="Fill" Value="{StaticResource SecondaryTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="true">
-                            <Setter TargetName="rectangle" Property="Fill" Value="{DynamicResource PrimaryTextBrush}" />
+                            <Setter TargetName="rectangle" Property="Fill" Value="{StaticResource PrimaryTextBrush}" />
                         </Trigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
@@ -127,10 +127,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="rectangle" Property="Fill" Value="{DynamicResource SecondaryTextBrush}" />
+                            <Setter TargetName="rectangle" Property="Fill" Value="{StaticResource SecondaryTextBrush}" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="true">
-                            <Setter TargetName="rectangle" Property="Fill" Value="{DynamicResource PrimaryTextBrush}" />
+                            <Setter TargetName="rectangle" Property="Fill" Value="{StaticResource PrimaryTextBrush}" />
                         </Trigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
@@ -162,7 +162,7 @@
     <Style x:Key="ScrollBarBaseStyle" TargetType="ScrollBar">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
