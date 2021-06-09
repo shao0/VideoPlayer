@@ -46,6 +46,16 @@ namespace UI.Library.Controls
     /// </summary>
     public class MimicryTextBox : TextBox
     {
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            "Title", typeof(string), typeof(MimicryTextBox), new PropertyMetadata(default(string)));
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string Title
+        {
+            get { return (string) GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
         static MimicryTextBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MimicryTextBox), new FrameworkPropertyMetadata(typeof(MimicryTextBox)));

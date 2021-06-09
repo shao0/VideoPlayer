@@ -3,12 +3,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:UI.Library.Controls">
     <Style TargetType="{x:Type controls:MimicryButton}">
-        <Setter Property="Width" Value="90" />
-        <Setter Property="Height" Value="40" />
+        <Setter Property="Width" Value="auto" />
+        <Setter Property="Height" Value="auto" />
+        <Setter Property="MinWidth" Value="30" />
+        <Setter Property="MinHeight" Value="30" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <controls:MimicryControl x:Name="Mimicry" MimicryPressed="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPressed}">
+                    <controls:MimicryControl
+                        x:Name="Mimicry"
+                        Margin="{TemplateBinding Margin}"
+                        Padding="{TemplateBinding Padding}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        MimicryPressed="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsPressed}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </controls:MimicryControl>
                     <ControlTemplate.Triggers>
