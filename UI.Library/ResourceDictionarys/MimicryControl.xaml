@@ -34,7 +34,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MimicryControl}">
-                    <Border Padding="5">
+                    <Border Padding="5" Background="Transparent">
                         <Grid
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"

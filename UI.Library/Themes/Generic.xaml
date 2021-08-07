@@ -11,5 +11,6 @@
         <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryImage.xaml" />
         <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicrySlider.xaml" />
         <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryComboBox.xaml" />
+        <ResourceDictionary Source="UI.Library;Component/ResourceDictionarys/MimicryMessage.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

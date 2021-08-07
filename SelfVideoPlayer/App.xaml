@@ -11,6 +11,12 @@
                 <ResourceDictionary Source="/UI.Library;Component/Styles/ListBoxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style BasedOn="{StaticResource ScrollViewerNativeBaseStyle}" TargetType="ScrollViewer" />
+            <Style
+                x:Key="Window.MessageHost.Style"
+                BasedOn="{StaticResource Window.MessageHost}"
+                TargetType="Window">
+                <Setter Property="Icon" Value="Icon.ico" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

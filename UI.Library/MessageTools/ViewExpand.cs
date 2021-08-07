@@ -1,12 +1,13 @@
 ﻿using System.Windows;
+using UI.Library.Controls;
 
 namespace UI.Library.MessageTools
 {
     public static class ViewExpand
     {
-        public static void Show(this FrameworkElement element, string msg, ShowEnum showEnum = ShowEnum.ShowText, uint outTime = 3000)
+        public static void Show(this FrameworkElement element, string msg, ShowEnum showEnum = ShowEnum.ShowText, int outTime = 3)
         {
-            if (showEnum == ShowEnum.ShowText) MessageAttached.Show(element, msg, outTime);
+            if (showEnum == ShowEnum.ShowText) MimicryMessage.ShowMessage(element, msg, outTime);
         }
 
     }

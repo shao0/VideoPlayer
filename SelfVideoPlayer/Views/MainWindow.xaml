@@ -12,8 +12,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    Icon="../Icon.ico"
-    Style="{StaticResource Window.MessageHost}"
+    Style="{StaticResource Window.MessageHost.Style}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <b:Interaction.Triggers>

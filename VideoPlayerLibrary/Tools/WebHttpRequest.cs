@@ -41,7 +41,7 @@ namespace VideoPlayerLibrary.Tools
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             return result;
         }

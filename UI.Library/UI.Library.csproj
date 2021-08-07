@@ -55,7 +55,9 @@
     <Compile Include="Converts\PositionConvert.cs" />
     <Compile Include="Converts\ScaleConvert.cs" />
     <Compile Include="Converts\VisibilityConvert.cs" />
+    <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="MessageTools\MessageAttached.cs" />
+    <Compile Include="Controls\MimicryMessage.cs" />
     <Compile Include="Panels\InsertionOrderPanel.cs" />
     <Compile Include="MessageTools\ViewExpand.cs" />
     <Page Include="ResourceDictionarys\MimicryButton.xaml">
@@ -75,6 +77,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDictionarys\MimicryImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionarys\MimicryMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

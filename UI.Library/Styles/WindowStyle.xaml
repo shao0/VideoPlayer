@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:UI.Library.Controls"
     xmlns:converts="clr-namespace:UI.Library.Converts"
     xmlns:messageTools="clr-namespace:UI.Library.MessageTools">
     <converts:BorderClipConvert x:Key="BorderClipConverter" />
@@ -216,15 +217,16 @@
                                 <RowDefinition Height="50" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <Grid
+                            <ContentPresenter Grid.Row="1" Margin="5" />
+                            <StackPanel
                                 Grid.Row="1"
-                                messageTools:MessageAttached.MessageHost="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                HorizontalAlignment="Left"
+                                controls:MimicryMessage.MessagePanel="{Binding RelativeSource={RelativeSource Self}}"
                                 ClipToBounds="True">
                                 <!--<Grid.Effect>
                                     <DropShadowEffect Opacity="1" ShadowDepth="0" />
                                 </Grid.Effect>-->
-                                <ContentPresenter Margin="2" />
-                            </Grid>
+                            </StackPanel>
                             <Border Grid.Row="0">
                                 <Border.Effect>
                                     <DropShadowEffect Opacity="0.4" ShadowDepth="1" />
